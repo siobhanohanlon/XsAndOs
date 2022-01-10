@@ -5,7 +5,6 @@ char squares[10] = {'0','1','2','3','4','5','6','7','8','9'};
 
 //Define Functions
 void NewGame();
-void CreateBoard();
 //void ContinueGame();
 void PlayGame();
 //void SaveGame();
@@ -41,14 +40,6 @@ void NewGame()
 	int player = 1;
 
 	//Create the Board
-	CreateBoard();
-
-	PlayGame(player);
-}
-
-//Create Board
-void CreateBoard()
-{
 	printf("\t\t    |         |\n");
 	printf("\t       %c    |    %c    |    %c\n", squares[0], squares[1], squares[2]);
 	printf("\t   _________|_________|_________\n");
@@ -58,6 +49,8 @@ void CreateBoard()
 	printf("\t\t    |         |\n");
 	printf("\t       %c    |    %c    |    %c\n", squares[7], squares[8], squares[9]);
 	printf("\t\t    |         |\n");
+
+	PlayGame(player);
 }
 
 //Play Game
