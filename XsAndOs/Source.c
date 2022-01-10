@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 //Declare Variables
-char squares[9] = {'1','2','3','4','5','6','7','8','9'};
+char squares[9];
 
 //Define Functions
 void NewGame();
@@ -39,6 +39,12 @@ void NewGame()
 {
 	//Declare Variables
 	int player = 1;
+
+	//Reset Square Array
+	for (int sq = 0; sq < 9; sq++)
+	{
+		squares[sq] = (sq + 1);
+	}
 
 	//Create the Board
 	CreateBoard();
@@ -81,36 +87,36 @@ void PlayGame(int player)
 		}
 
 #pragma region ChangeSquaresMark
-		if (choice == 1 && squares[1] == '1')
+		if (choice == 1 && squares[0] == '1')
+
+			squares[0] = mark;
+		else if (choice == 2 && squares[1] == '2')
 
 			squares[1] = mark;
-		else if (choice == 2 && squares[2] == '2')
+		else if (choice == 3 && squares[2] == '3')
 
 			squares[2] = mark;
-		else if (choice == 3 && squares[3] == '3')
+		else if (choice == 4 && squares[3] == '4')
 
 			squares[3] = mark;
-		else if (choice == 4 && squares[4] == '4')
+		else if (choice == 5 && squares[4] == '5')
 
 			squares[4] = mark;
-		else if (choice == 5 && squares[5] == '5')
+		else if (choice == 6 && squares[5] == '6')
 
 			squares[5] = mark;
-		else if (choice == 6 && squares[6] == '6')
+		else if (choice == 7 && squares[6] == '7')
 
 			squares[6] = mark;
-		else if (choice == 7 && squares[7] == '7')
+		else if (choice == 8 && squares[7] == '8')
 
 			squares[7] = mark;
-		else if (choice == 8 && squares[8] == '8')
+		else if (choice == 9 && squares[8] == '9')
 
 			squares[8] = mark;
-		else if (choice == 9 && squares[9] == '9')
-
-			squares[9] = mark;
 		else
 		{
-			printf("\n\n******Invalid Move*******");
+			printf("\n\n******Invalid Move*******\n");
 
 			player--;
 		}
