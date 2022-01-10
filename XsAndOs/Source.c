@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 //Declare Variables
-char squares[10] = {'0','1','2','3','4','5','6','7','8','9'};
+char squares[9] = {'1','2','3','4','5','6','7','8','9'};
 
 //Define Functions
 void NewGame();
@@ -53,10 +53,10 @@ void CreateBoard()
 	printf("\t       %c    |    %c    |    %c\n", squares[0], squares[1], squares[2]);
 	printf("\t   _________|_________|_________\n");
 	printf("\t\t    |         |\n");
-	printf("\t       %c    |    %c    |    %c\n", squares[4], squares[5], squares[6]);
+	printf("\t       %c    |    %c    |    %c\n", squares[3], squares[4], squares[5]);
 	printf("\t   _________|_________|_________\n");
 	printf("\t\t    |         |\n");
-	printf("\t       %c    |    %c    |    %c\n", squares[7], squares[8], squares[9]);
+	printf("\t       %c    |    %c    |    %c\n", squares[6], squares[7], squares[8]);
 	printf("\t\t    |         |\n");
 }
 
