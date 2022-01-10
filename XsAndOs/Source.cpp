@@ -1,4 +1,6 @@
-#include <stdio.h>
+#include <iostream>
+
+using namespace std;
 
 //Declare Variables
 char squares[9];
@@ -16,11 +18,11 @@ void main()
 {
 	int gameChoice;
 
-	printf("Please Enter 1 to Load a Saved Game or any Other Number to Start a New Game:\t");
-	scanf("%d", &gameChoice);
+	cout << "Please Enter 1 to Load a Saved Game or any Other Number to Start a New Game:\t";
+	cin >> gameChoice;
 
-	printf("\n\t\t Welcome to Xs & Os\n\n");
-	printf("\tPlayer 1: X\t\tPlayer 2: O\n\n");
+	cout << "\n\t\t Welcome to Xs & Os\n\n";
+	cout << "\tPlayer 1: X\t\tPlayer 2: O\n\n";
 
 	if (gameChoice == 1)
 	{
@@ -40,6 +42,8 @@ void NewGame()
 	//Declare Variables
 	int player = 1;
 
+	cout << player;
+
 	//Reset Square Array
 	for (int sq = 0; sq < 9; sq++)
 	{
@@ -49,136 +53,5 @@ void NewGame()
 	//Create the Board
 	CreateBoard();
 
-	PlayGame(player);
-}
-
-//Create Board
-void CreateBoard()
-{
-	printf("\t\t    |         |\n");
-	printf("\t       %c    |    %c    |    %c\n", squares[0], squares[1], squares[2]);
-	printf("\t   _________|_________|_________\n");
-	printf("\t\t    |         |\n");
-	printf("\t       %c    |    %c    |    %c\n", squares[3], squares[4], squares[5]);
-	printf("\t   _________|_________|_________\n");
-	printf("\t\t    |         |\n");
-	printf("\t       %c    |    %c    |    %c\n", squares[6], squares[7], squares[8]);
-	printf("\t\t    |         |\n");
-}
-
-//Play Game
-void PlayGame(int player)
-{
-	char mark;
-	int won, choice;
-
-	do {
-		printf("\n\nSelect a Square Number\n");
-		printf("Player %ds Turn:", player);
-		scanf("%d", &choice);
-
-		if (player == 1)
-		{
-			mark = 'X';
-		}
-		else
-		{
-			mark = 'O';
-		}
-
-#pragma region ChangeSquaresMark
-		if (choice == 1 && squares[0] == '1')
-
-			squares[0] = mark;
-		else if (choice == 2 && squares[1] == '2')
-
-			squares[1] = mark;
-		else if (choice == 3 && squares[2] == '3')
-
-			squares[2] = mark;
-		else if (choice == 4 && squares[3] == '4')
-
-			squares[3] = mark;
-		else if (choice == 5 && squares[4] == '5')
-
-			squares[4] = mark;
-		else if (choice == 6 && squares[5] == '6')
-
-			squares[5] = mark;
-		else if (choice == 7 && squares[6] == '7')
-
-			squares[6] = mark;
-		else if (choice == 8 && squares[7] == '8')
-
-			squares[7] = mark;
-		else if (choice == 9 && squares[8] == '9')
-
-			squares[8] = mark;
-		else
-		{
-			printf("\n\n******Invalid Move*******\n");
-
-			player--;
-		}
-#pragma endregion
-
-		//Update Board
-		CreateBoard();
-
-		//Check if Game Won
-		won = CheckWin();
-	} while (won == -1);
-
-	EndOfGame(won);
-}
-
-//Check for Win
-int CheckWin()
-{
-	//HorizontalLine
-	for (int i = 0; i < 9; i + 3)
-	{
-		if (squares[i] == squares[i + 1] == squares[i + 2])
-		{
-			return 1;
-		}
-	}
-
-	//VerticalLine
-	for (int i = 0; i < 3; i++)
-	{
-		if (squares[i] == squares[i + 3] == squares[i + 3])
-		{
-			return 1;
-		}
-	}
-
-	//DiagonalLine
-	for (int i = 0; i < 2; i + 3)
-	{
-		if (squares[i] == squares[i + 4] == squares[i + 4])
-		{
-			return 1;
-		}
-	}
-
-	//Draw
-	if (squares[0] != '1' && squares[1] != '2' && squares[2] != '3'
-		&& squares[3] != '4' && squares[4] != '5' && squares[5] != '6'
-		&& squares[6] != '7' && squares[7] != '8' && squares[8] != '9')
-	{
-		return 0;
-	}
-
-	//Keep Playing
-	else
-	{
-		return -1;
-	}
-}
-
-//End of Game
-void EndOfGame()
-{
-
+	PlayGame();
 }
