@@ -68,7 +68,7 @@ void PlayGame(int player)
 
 	do {
 		printf("\n\nSelect a Square Number\n");
-		printf("Player %ds Turn:\n");
+		printf("Player %ds Turn:", player);
 		scanf("%d", &choice);
 
 		if (player == 1)
@@ -115,6 +115,9 @@ void PlayGame(int player)
 			player--;
 		}
 #pragma endregion
+
+		//Update Board
+		CreateBoard();
 
 		//Check if Game Won
 		won = CheckWin();
