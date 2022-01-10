@@ -115,3 +115,54 @@ void PlayGame(int player, int choice)
 
 	EndOfGame(won);
 }
+
+//Check for Win
+int CheckWin()
+{
+	//HorizontalLine
+	for (int i = 0; i < 9; i + 3)
+	{
+		if (squares[i] == squares[i + 1] == squares[i + 2])
+		{
+			return 1;
+		}
+	}
+
+	//VerticalLine
+	for (int i = 0; i < 3; i++)
+	{
+		if (squares[i] == squares[i + 3] == squares[i + 3])
+		{
+			return 1;
+		}
+	}
+
+	//DiagonalLine
+	for (int i = 0; i < 2; i + 3)
+	{
+		if (squares[i] == squares[i + 4] == squares[i + 4])
+		{
+			return 1;
+		}
+	}
+
+	//Draw
+	if (squares[0] != '1' && squares[1] != '2' && squares[2] != '3'
+		&& squares[3] != '4' && squares[4] != '5' && squares[5] != '6'
+		&& squares[6] != '7' && squares[7] != '8' && squares[8] != '9')
+	{
+		return 0;
+	}
+
+	//Keep Playing
+	else
+	{
+		return -1;
+	}
+}
+
+//End of Game
+void EndOfGame()
+{
+
+}
