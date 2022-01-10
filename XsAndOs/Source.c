@@ -8,6 +8,7 @@ void NewGame();
 void ContinueGame();
 void PlayGame();
 void SaveGame();
+void EndOfGame();
 int CheckWin();
 
 void main()
@@ -52,7 +53,65 @@ void NewGame()
 	PlayGame(player);
 }
 
-void PlayGame();
+//Play Game
+void PlayGame(int player, int choice)
+{
+	char mark;
+	int won, choice;
 
-//Check if Game is Won
-CheckWin();
+	do {
+		printf("\n\nSelect a Square Number\n");
+		printf("Player %ds Turn:\n");
+		scanf("%d", &choice);
+
+		if (player == 1)
+		{
+			mark = 'X';
+		}
+		else
+		{
+			mark = 'O';
+		}
+
+#pragma region ChangeSquaresMark
+		if (choice == 1 && squares[1] == '1')
+
+			squares[1] = mark;
+		else if (choice == 2 && squares[2] == '2')
+
+			squares[2] = mark;
+		else if (choice == 3 && squares[3] == '3')
+
+			squares[3] = mark;
+		else if (choice == 4 && squares[4] == '4')
+
+			squares[4] = mark;
+		else if (choice == 5 && squares[5] == '5')
+
+			squares[5] = mark;
+		else if (choice == 6 && squares[6] == '6')
+
+			squares[6] = mark;
+		else if (choice == 7 && squares[7] == '7')
+
+			squares[7] = mark;
+		else if (choice == 8 && squares[8] == '8')
+
+			squares[8] = mark;
+		else if (choice == 9 && squares[9] == '9')
+
+			squares[9] = mark;
+		else
+		{
+			printf("\n\n******Invalid Move*******");
+
+			player--;
+		}
+#pragma endregion
+
+		//Check if Game Won
+		won = CheckWin();
+	} while (won == -1);
+
+	EndOfGame(won);
+}
