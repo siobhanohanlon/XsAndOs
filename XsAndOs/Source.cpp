@@ -10,20 +10,15 @@ int player;
 void NewGame();
 void CreateBoard();
 //void ContinueGame();
-//void PlayGame();
 //void SaveGame();
 void EndOfGame();
-int CheckWin();
 
-void main()
+int main()
 {
 	int gameChoice;
 
 	cout << "Please Enter 1 to Load a Saved Game or any Other Number to Start a New Game:\t";
 	cin >> gameChoice;
-
-	cout << "\n\t\t Welcome to Xs & Os\n\n";
-	cout << "\tPlayer 1: X\t\tPlayer 2: O\n\n";
 
 	if (gameChoice == 1)
 	{
@@ -35,49 +30,95 @@ void main()
 		//Start a New Game
 		NewGame();
 	}
-}
 
-//NewGame
-void NewGame()
-{
-	//Declare Variables
-	int player = 1;
-
-	//Reset Square Array
-	for (int sq = 0; sq < 9; sq++)
-	{
-		squares[sq] = (sq + 1);
-	}
-
-	//Create the Board
-	CreateBoard();
-
-	/PlayGame();
+	return 0;
 }
 
 //Create Board
 void CreateBoard()
 {
+	//Clear Console
+	system("cls");
+
+	cout << "\n\t\t Welcome to Xs & Os\n\n";
+	cout << "\tPlayer 1: X\t\tPlayer 2: O\n\n";
+
 	cout << "\t\t    |         |\n";
 	cout << "\t       " << squares[0] << "    |    " << squares[1] << "    |    " << squares[2] << "\n";
 	cout << "\t   _________|_________|_________\n";
 	cout << "\t\t    |         |\n";
-	cout << "\t       " << squares[4] << "    |    " << squares[5] << "    |    " << squares[6] << "\n";
+	cout << "\t       " << squares[3] << "    |    " << squares[4] << "    |    " << squares[5] << "\n";
 	cout << "\t   _________|_________|_________\n";
 	cout << "\t\t    |         |\n";
-	cout << "\t       " << squares[7] << "    |    " << squares[8] << "    |    " << squares[9] << "\n";
+	cout << "\t       " << squares[6] << "    |    " << squares[7] << "    |    " << squares[8] << "\n";
 	cout << "\t\t    |         |\n";
 }
 
+//Check for Win
+int CheckWin()
+{
+	//Horizontal
+	if (squares[0] == squares[1] && squares[1] == squares[2])
+	{
+		return 1;
+	}
+
+	else if (squares[3] == squares[4] && squares[4] == squares[5])
+	{
+		return 1;
+	}
+
+	else if (squares[6] == squares[7] && squares[7] == squares[8])
+	{
+		return 1;
+	}
+
+	else if (squares[0] == squares[3] && squares[3] == squares[6])
+	{
+		return 1;
+	}
+
+	else if (squares[1] == squares[4] && squares[4] == squares[7])
+	{
+		return 1;
+	}
+
+	else if (squares[2] == squares[5] && squares[5] == squares[8])
+	{
+		return 1;
+	}
+
+	else if (squares[0] == squares[4] && squares[4] == squares[8])
+	{
+		return 1;
+	}
+
+	else if (squares[2] == squares[4] && squares[4] == squares[6])
+	{
+		return 1;
+	}
+
+	else if (squares[0] != '1' && squares[1] != '2' && squares[2] != '3'
+		&& squares[3] != '4' && squares[4] != '5' && squares[5] != '6'
+		&& squares[6] != '7' && squares[7] != '8' && squares[8] != '9')
+
+		return 0;
+	else
+		return -1;
+}
+
 //Play Game
-void PlayGame()
+void PlayGame(int player)
 {
 	char mark;
-	int won, choice;
+	int won = -1, choice;
+
+	//Update Board
+	CreateBoard();
 
 	do {
 		cout << "\n\nSelect a Square Number\n";
-		cout << "Player %ds Turn:", player;
+		cout << "Player " << player << "s Turn: ";
 		cin >> choice;
 
 		if (player == 1)
@@ -89,37 +130,56 @@ void PlayGame()
 			mark = 'O';
 		}
 
+
 #pragma region ChangeSquaresMark
 		if (choice == 1 && squares[0] == '1')
-
+		{
 			squares[0] = mark;
+		}
+
 		else if (choice == 2 && squares[1] == '2')
-
+		{
 			squares[1] = mark;
+		}
+
 		else if (choice == 3 && squares[2] == '3')
-
+		{
 			squares[2] = mark;
+		}
+
 		else if (choice == 4 && squares[3] == '4')
-
+		{
 			squares[3] = mark;
+		}
+
 		else if (choice == 5 && squares[4] == '5')
-
+		{
 			squares[4] = mark;
+		}
+
 		else if (choice == 6 && squares[5] == '6')
-
+		{
 			squares[5] = mark;
+		}
+
 		else if (choice == 7 && squares[6] == '7')
-
+		{
 			squares[6] = mark;
+		}
+
 		else if (choice == 8 && squares[7] == '8')
-
+		{
 			squares[7] = mark;
-		else if (choice == 9 && squares[8] == '9')
+		}
 
+		else if (choice == 9 && squares[8] == '9')
+		{
 			squares[8] = mark;
+		}
+
 		else
 		{
-			printf("\n\n******Invalid Move*******\n");
+			cerr << "******Invalid Move*******";
 
 			player--;
 		}
@@ -130,54 +190,67 @@ void PlayGame()
 
 		//Check if Game Won
 		won = CheckWin();
-	} while (won == -1);
 
-	EndOfGame();
+		//Update Player
+		if (player == 1)
+		{
+			player++;
+		}
+		else
+		{
+			player--;
+		}
+	} while (won == -1);
 }
 
-//Check for Win
-int CheckWin()
+//NewGame
+void NewGame()
 {
-	//HorizontalLine
-	for (int i = 0; i < 9; i + 3)
+	//Declare Variables
+	int player = 1;
+
+	//Reset Square Arrays
+	for (int sq = 0; sq < 9; sq++)
 	{
-		if (squares[i] == squares[i + 1] == squares[i + 2])
+		//Square Char
+		switch (sq)
 		{
-			return 1;
+		case 0:
+			squares[0] = '1';
+			break;
+		case 1:
+			squares[1] = '2';
+			break;
+		case 2:
+			squares[2] = '3';
+			break;
+		case 3:
+			squares[3] = '4';
+			break;
+		case 4:
+			squares[4] = '5';
+			break;
+		case 5:
+			squares[5] = '6';
+			break;
+		case 6:
+			squares[6] = '7';
+			break;
+		case 7:
+			squares[7] = '8';
+			break;
+		case 8:
+			squares[8] = '9';
+			break;
+		default:
+			break;
 		}
 	}
 
-	//VerticalLine
-	for (int i = 0; i < 3; i++)
-	{
-		if (squares[i] == squares[i + 3] == squares[i + 3])
-		{
-			return 1;
-		}
-	}
+	//Create the Board
+	CreateBoard();
 
-	//DiagonalLine
-	for (int i = 0; i < 2; i + 3)
-	{
-		if (squares[i] == squares[i + 4] == squares[i + 4])
-		{
-			return 1;
-		}
-	}
-
-	//Draw
-	if (squares[0] != '1' && squares[1] != '2' && squares[2] != '3'
-		&& squares[3] != '4' && squares[4] != '5' && squares[5] != '6'
-		&& squares[6] != '7' && squares[7] != '8' && squares[8] != '9')
-	{
-		return 0;
-	}
-
-	//Keep Playing
-	else
-	{
-		return -1;
-	}
+	PlayGame(player);
 }
 
 //End of Game
