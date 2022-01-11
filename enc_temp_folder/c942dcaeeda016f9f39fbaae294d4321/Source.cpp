@@ -12,7 +12,6 @@ void CreateBoard();
 //void ContinueGame();
 //void SaveGame();
 void EndOfGame();
-void Menu();
 
 int main()
 {
