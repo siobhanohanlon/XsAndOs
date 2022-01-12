@@ -1,18 +1,19 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
 //Declare Variables
+char grid = 179;
 char squares[9];
 int player;
 
 //Define Functions
 void NewGame();
 void CreateBoard();
-//void ContinueGame();
-//void SaveGame();
-void EndOfGame();
-void Menu();
+void LoadGame();
+void SaveGame();
+void Menu(int player);
 
 int main()
 {
@@ -24,7 +25,7 @@ int main()
 	if (gameChoice == 1)
 	{
 		//Go to Load Game Function
-		//ContinueGame();
+		LoadGame();
 	}
 	else
 	{
@@ -38,21 +39,22 @@ int main()
 //Create Board
 void CreateBoard()
 {
+	//grid = 179;
 	//Clear Console
 	system("cls");
 
 	cout << "\n\t\t Welcome to Xs & Os\n\n";
 	cout << "\tPlayer 1: X\t\tPlayer 2: O\n\n";
 
-	cout << "\t\t    |         |\n";
-	cout << "\t       " << squares[0] << "    |    " << squares[1] << "    |    " << squares[2] << "\n";
-	cout << "\t   _________|_________|_________\n";
-	cout << "\t\t    |         |\n";
-	cout << "\t       " << squares[3] << "    |    " << squares[4] << "    |    " << squares[5] << "\n";
-	cout << "\t   _________|_________|_________\n";
-	cout << "\t\t    |         |\n";
-	cout << "\t       " << squares[6] << "    |    " << squares[7] << "    |    " << squares[8] << "\n";
-	cout << "\t\t    |         |\n";
+	cout << "\t\t    " << grid << "         " << grid << endl;
+	cout << "\t       " << squares[0] << "    " << grid << "    " << squares[1] << "    " << grid << "    " << squares[2] << endl;
+	cout << "\t   _________" << grid << "_________" << grid << "_________" << endl;
+	cout << "\t\t    " << grid << "         " << grid << endl;
+	cout << "\t       " << squares[3] << "    " << grid << "    " << squares[4] << "    " << grid << "    " << squares[5] << endl;
+	cout << "\t   _________" << grid << "_________" << grid << "_________" << endl;
+	cout << "\t\t    " << grid << "         " << grid << endl;
+	cout << "\t       " << squares[6] << "    " << grid << "    " << squares[7] << "    " << grid << "    " << squares[8] << endl;
+	cout << "\t\t    " << grid << "         " << grid << endl;
 }
 
 //Check for Win
@@ -108,10 +110,74 @@ int CheckWin()
 		return -1;
 }
 
+//Check Square Choice
+int CheckSquare(int choice, char mark)
+{
+	if (choice == 1 && squares[0] == '1')
+	{
+		squares[0] = mark;
+		return 1;
+	}
+
+	else if (choice == 2 && squares[1] == '2')
+	{
+		squares[1] = mark;
+		return 1;
+	}
+
+	else if (choice == 3 && squares[2] == '3')
+	{
+		squares[2] = mark;
+		return 1;
+	}
+
+	else if (choice == 4 && squares[3] == '4')
+	{
+		squares[3] = mark;
+		return 1;
+	}
+
+	else if (choice == 5 && squares[4] == '5')
+	{
+		squares[4] = mark;
+		return 1;
+	}
+
+	else if (choice == 6 && squares[5] == '6')
+	{
+		squares[5] = mark;
+		return 1;
+	}
+
+	else if (choice == 7 && squares[6] == '7')
+	{
+		squares[6] = mark;
+		return 1;
+	}
+
+	else if (choice == 8 && squares[7] == '8')
+	{
+		squares[7] = mark;
+		return 1;
+	}
+
+	else if (choice == 9 && squares[8] == '9')
+	{
+		squares[8] = mark;
+		return 1;
+	}
+
+	else
+	{
+		return 0;
+	}
+}
 
 //End of Game
 void EndOfGame(int result, int winner)
 {
+	int choice;
+
 	cout << "\n\n****Game Over***\n";
 
 	//Winner
@@ -124,15 +190,26 @@ void EndOfGame(int result, int winner)
 	else
 	{
 		cout << "Game has ended in a draw";
-		Menu();
+	}
+
+	cout << "\n\n0: New Game\tAnything else to Exit\nChoice:  ";
+	cin >> choice;
+
+	if (choice == 0)
+	{
+		NewGame();
+	}
+	else
+	{
+		exit(0);
 	}
 }
 
 //Play Game
 void PlayGame(int player)
 {
+	int won = -1, choice, error = 0, cont = 0;
 	char mark;
-	int won = -1, choice, error = 0;
 
 	//Update Board
 	CreateBoard();
@@ -153,69 +230,27 @@ void PlayGame(int player)
 
 		if (choice == 0)
 		{
-			Menu();
+			Menu(player);
 		}
 
-#pragma region ChangeSquaresMark
-		if (choice == 1 && squares[0] == '1')
-		{
-			squares[0] = mark;
-		}
-
-		else if (choice == 2 && squares[1] == '2')
-		{
-			squares[1] = mark;
-		}
-
-		else if (choice == 3 && squares[2] == '3')
-		{
-			squares[2] = mark;
-		}
-
-		else if (choice == 4 && squares[3] == '4')
-		{
-			squares[3] = mark;
-		}
-
-		else if (choice == 5 && squares[4] == '5')
-		{
-			squares[4] = mark;
-		}
-
-		else if (choice == 6 && squares[5] == '6')
-		{
-			squares[5] = mark;
-		}
-
-		else if (choice == 7 && squares[6] == '7')
-		{
-			squares[6] = mark;
-		}
-
-		else if (choice == 8 && squares[7] == '8')
-		{
-			squares[7] = mark;
-		}
-
-		else if (choice == 9 && squares[8] == '9')
-		{
-			squares[8] = mark;
-		}
 		else
 		{
-			error = 1;
+			error = CheckSquare(choice, mark);
 		}
-#pragma endregion
 
 		//Error
-		while(error == 1)
+		while (error == 0)
 		{
 			cerr << "******Invalid Move*******\nPlease Pick a Square Number: ";
 			cin.ignore();
 			cin >> choice;
-			error = 0;
+
+			if (choice > 0 && choice < 10)
+			{
+				error = CheckSquare(choice, mark);
+			}
 		}
-		
+			
 		//Update Board
 		CreateBoard();
 
@@ -223,20 +258,23 @@ void PlayGame(int player)
 		won = CheckWin();
 
 		//Update Player
-		if (player == 1)
+		if (won == -1)
 		{
-			player++;
-		}
-		else
-		{
-			player--;
+			if (player == 1)
+			{
+				player++;
+			}
+			else
+			{
+				player--;
+			}
 		}
 	} while (won == -1);
 
 	EndOfGame(won, player);
 }
 
-//NewGame
+//New Game
 void NewGame()
 {
 	//Declare Variables
@@ -286,7 +324,47 @@ void NewGame()
 	PlayGame(player);
 }
 
-void Menu()
-{
 
+//Menu
+void Menu(int player)
+{
+	int options, newG;
+
+	cout << "\n\n" << "\t\t\t\t\t***** Menu *****" << endl;
+	cout << "0: Continue Current Game\t1: New Game\t2: Save Game & Exit\t3: Load Game\t4: Exit\nPlease Choose an Option: ";
+	cin >> options;
+
+	switch (options)
+	{
+		case 0:
+			CreateBoard();
+			PlayGame(player);
+		case 1:
+			cout << "Are you sure you want to start a new game?\nEnter 1 for Yes or anything else for No:  ";
+			cin >> newG;
+
+			if (newG == 1)
+			{
+				NewGame();
+			}
+			else
+				CreateBoard();
+				Menu(player);
+			break;
+		case 2:
+			SaveGame(player);
+			exit(0);
+			break;
+		case 3:
+			LoadGame();
+			break;
+		case 4:
+			exit(0);
+			break;
+		default:
+			CreateBoard();
+			cerr << "Invalid Entry!!";
+			Menu(player);
+			break;
+	}
 }
