@@ -325,6 +325,26 @@ void NewGame()
 }
 
 
+//Save Game
+void SaveGame(int player)
+{
+	//Create Instance
+	ofstream fileWrite;
+
+	fileWrite.open("GameData.txt");
+
+	for (int i = 0; i < 9; i++)
+	{
+		fileWrite << squares[i];
+	}
+
+	fileWrite << endl << player;
+
+	fileWrite.close();
+}
+
+
+
 //Menu
 void Menu(int player)
 {
