@@ -324,7 +324,6 @@ void NewGame()
 	PlayGame(player);
 }
 
-
 //Save Game
 void SaveGame(int player)
 {
@@ -343,7 +342,32 @@ void SaveGame(int player)
 	fileWrite.close();
 }
 
+//Load Game
+void LoadGame()
+{
+	//Create Instance
+	ifstream fileRead;
 
+	fileRead.open("GameData.txt");
+
+	if (!fileRead)
+	{
+		cerr << "File couldnt be opened!!";
+		CreateBoard();
+		Menu(player);
+	}
+
+	for (int j = 0; j < 9; j++)
+	{
+		fileRead >> squares[j];
+	}
+
+	fileRead >> player;
+
+	fileRead.close();
+
+	PlayGame(player);
+}
 
 //Menu
 void Menu(int player)
