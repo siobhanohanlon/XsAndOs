@@ -39,12 +39,27 @@ int main()
 //Create Board
 void CreateBoard()
 {
-	//grid = 179;
-	//Clear Console
-	system("cls");
+	bool front = true;
+	string message = "Welcome to Xs & Os";
 
-	cout << "\n\t\t Welcome to Xs & Os\n\n";
-	cout << "\tPlayer 1: X\t\tPlayer 2: O\n\n";
+	//Clear Console
+	system("cls");//36
+
+	cout << "\n\n\t";
+	for (int i = message.length(); i < 36; i++)
+	{
+		if (front)
+		{
+			message = " " + message;
+		}
+		else
+		{
+			message = message + " ";
+		}
+		front = !front;
+	}
+	cout << message.c_str();
+	cout << "\n\n\tPlayer 1: X\t\tPlayer 2: O\n\n";
 
 	cout << "\t\t    " << grid << "         " << grid << endl;
 	cout << "\t       " << squares[0] << "    " << grid << "    " << squares[1] << "    " << grid << "    " << squares[2] << endl;
